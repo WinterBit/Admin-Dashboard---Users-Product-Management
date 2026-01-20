@@ -1,8 +1,8 @@
 
-function ProductTable(){
+const ProductTable = () => {
   return (
     <div>
-        This is Product Table
+      This is Product Table
     </div>
   )
 }

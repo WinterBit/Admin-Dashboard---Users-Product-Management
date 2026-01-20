@@ -1,5 +1,5 @@
 
-function Login() {
+const Login = () => {
     return (
         <div>
             This is Login Page

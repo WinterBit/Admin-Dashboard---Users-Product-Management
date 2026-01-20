@@ -1,5 +1,5 @@
 
-function UserDetails() {
+const UserDetails = () => {
   return (
     <div>
       This is Users Details Page

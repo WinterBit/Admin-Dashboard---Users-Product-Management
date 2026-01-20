@@ -1,6 +1,6 @@
 import UserTable from '../components/UserTable'
 
-function Users() {
+const Users = () => {
   return (
     <div>
       This is Users Page

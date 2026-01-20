@@ -1,6 +1,6 @@
 import ProductTable from '../components/ProductTable'
 
-function Product() {
+const Product = () => {
   return (
     <div>
       This is Product Page

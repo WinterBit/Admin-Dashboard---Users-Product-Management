@@ -1,8 +1,8 @@
 
-function UserTable(){
+const UserTable = () => {
   return (
     <div>
-        This is User Table
+      This is User Table
     </div>
   )
 }
