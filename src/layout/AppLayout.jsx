@@ -4,7 +4,7 @@ import Sidebar from '../components/Sidebar'
 
 const AppLayout = () => {
     return (
-        <div>
+        <div className="w-screen h-screen bg-[#DEE4E7]">
             <Navbar />
             <Sidebar />
 
