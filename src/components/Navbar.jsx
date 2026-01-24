@@ -1,11 +1,11 @@
-import MainLogo from '../assets/MainLogo.svg'
+import mainLogo from '../assets/MainLogo.svg'
 
 function Navbar() {
   return (
-    <nav className="h-20 flex">
+    <nav className="h-[10%] flex">
 
       <div className="left w-1/4 h-full flex items-center space-x-2 px-7 bg-white">
-        <img src={MainLogo} alt="Dashboard Logo" className='h-10' />
+        <img src={mainLogo} alt="Dashboard Logo" className='h-10' />
         <p className='font-extrabold text-xl'>Admin Dashboard</p>
       </div>
 
