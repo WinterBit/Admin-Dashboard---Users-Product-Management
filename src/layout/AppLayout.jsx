@@ -10,7 +10,7 @@ const AppLayout = () => {
             <div className="h-[90%] flex">
 
                 <Sidebar />
-                <main>
+                <main className="w-3/4">
                     <Outlet />
                 </main>
 
