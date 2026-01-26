@@ -4,7 +4,7 @@ import Sidebar from '../components/Sidebar'
 
 const AppLayout = () => {
     return (
-        <div className="w-screen h-screen bg-[#DEE4E7]">
+        <div className="w-screen h-screen bg-[#DEE4E7] overflow-y-hidden">
             <Navbar />
 
             <div className="h-[90%] flex">
