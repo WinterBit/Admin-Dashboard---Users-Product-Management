@@ -6,6 +6,9 @@ import { fetchUsers } from '../api/User';
 const Users = () => {
 
   const [users, setUsers] = useState([])
+  const [search, setSearch] = useState("")
+  const [filteredUsers, setFilteredUsers] = useState({})
+
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -30,6 +33,25 @@ const Users = () => {
     }
   }, [])
 
+  function handleSearch(e) {
+    const query = e.target.value.toLowerCase();
+    setSearch(e.target.value)
+    setLoading(true)
+    setFilteredUsers(users.find((user) => (
+      user.name.toLowerCase().includes(query)
+    )))
+    setLoading(false)
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    setLoading(true)
+    setFilteredUsers(users.find((user) => (
+      user.name.toLowerCase().includes(search.toLocaleLowerCase())
+    )))
+    setLoading(false)
+  }
+
   return (
     <div className='user-page flex justify-center w-full pt-10'>
 
@@ -38,9 +60,9 @@ const Users = () => {
         <div className="top flex justify-between items-center py-5 px-15">
 
           <p className='text-xl font-medium'>All Users</p>
-          <form className='search flex justify-center items-center space-x-1.5 bg-[#DEE4E7] px-4 py-2 rounded-lg'>
+          <form className='search flex justify-center items-center space-x-1.5 bg-[#DEE4E7] px-4 py-2 rounded-lg' onSubmit={handleSubmit}>
             <CiSearch size={"1.5rem"} color='#757575' />
-            <input className='border-none outline-none' type="text" placeholder='search for users' />
+            <input className='border-none outline-none' type="text" placeholder='search by user name' value={search} onChange={handleSearch} />
           </form>
 
         </div>
@@ -63,22 +85,37 @@ const Users = () => {
         </div>
 
         <div className="users-container px-15 overflow-y-scroll max-h-[60vh]">
-          {error &&
+          {
+            error &&
             <div className="user-row flex border-b p-5 text-red-500">
               {error}
             </div>
           }
 
-          {loading &&
+          {
+            loading &&
             <div className="user-row flex border-b p-5">
               Loading...
             </div>
           }
 
-          {!loading && !error &&
+          {
+            !loading && !error && search.length === 0 &&
             users.map((user) => (
               <UserRow user={user} key={user.id} />
             ))
+          }
+
+          {
+            search.length !== 0 && filteredUsers !== (null || undefined) &&
+            <UserRow user={filteredUsers} key={filteredUsers.id} />
+          }
+
+          {
+            filteredUsers === (null || undefined) &&
+            <div className="user-row flex border-b p-5">
+              User not Found
+            </div>
           }
         </div>
 
