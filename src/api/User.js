@@ -1,8 +1,8 @@
-export async function fetchUsers() {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+export async function fetchUsers({ signal } = {}) {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users", { signal });
     const data = await response.json();
 
-    if(!response.ok){
+    if (!response.ok) {
         throw new Error("Failed to fetch Users!")
     }
 

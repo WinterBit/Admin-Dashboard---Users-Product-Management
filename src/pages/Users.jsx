@@ -6,22 +6,28 @@ import { fetchUsers } from '../api/User';
 const Users = () => {
 
   const [users, setUsers] = useState([])
-  const [error, setError] = useState()
+  const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    const controller = new AbortController();
+
     async function loadUsers() {
       try {
-        const response = await fetchUsers();
+        const response = await fetchUsers({ signal: controller.signal });
         setUsers(response);
       } catch (err) {
-        setError(err.message)
+        if (err.name !== "AbortError") setError(err.message)
       } finally {
         setLoading(false)
       }
     }
 
     loadUsers()
+
+    return () => {
+      controller.abort();
+    }
   }, [])
 
   return (
@@ -69,7 +75,7 @@ const Users = () => {
             </div>
           }
 
-          {!loading &&
+          {!loading && !error &&
             users.map((user) => (
               <UserRow user={user} key={user.id} />
             ))
