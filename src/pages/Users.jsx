@@ -1,7 +1,29 @@
+import { useEffect, useState } from 'react';
 import UserRow from '../components/UserRow'
 import { CiSearch } from "react-icons/ci";
+import { fetchUsers } from '../api/User';
 
 const Users = () => {
+
+  const [users, setUsers] = useState([])
+  const [error, setError] = useState()
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function loadUsers() {
+      try {
+        const response = await fetchUsers();
+        setUsers(response);
+      } catch (err) {
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadUsers()
+  }, [])
+
   return (
     <div className='user-page flex justify-center w-full pt-10'>
 
@@ -35,6 +57,23 @@ const Users = () => {
         </div>
 
         <div className="users-container px-15 overflow-y-scroll max-h-[60vh]">
+          {error &&
+            <div className="user-row flex border-b p-5 text-red-500">
+              {error}
+            </div>
+          }
+
+          {loading &&
+            <div className="user-row flex border-b p-5">
+              Loading...
+            </div>
+          }
+
+          {!loading &&
+            users.map((user) => (
+              <UserRow user={user} key={user.id} />
+            ))
+          }
         </div>
 
       </div>
