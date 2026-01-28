@@ -1,5 +1,13 @@
+import { useNavigate } from "react-router-dom"
 
 const UserTable = ({user}) => {
+
+  const navigate = useNavigate()
+
+  function handleView(){
+    navigate(`/dashboard/users/${user.id}`)
+  }
+
   return (
     <div className="user-row flex border-b">
       <div className="user-name w-full p-5 pl-0 flex items-center text-lg font-medium">
@@ -12,7 +20,7 @@ const UserTable = ({user}) => {
         {user.address.city}
       </div>
       <div className="actions w-full p-5 pl-0 flex items-center">
-        <button className="bg-green-500 text-white px-3 py-1 rounded-lg text-lg font-medium cursor-pointer hover:bg-green-600">view</button>
+        <button className="bg-green-500 text-white px-3 py-1 rounded-lg text-lg font-medium cursor-pointer hover:bg-green-600" onClick={handleView}>view</button>
       </div>
     </div>
   )

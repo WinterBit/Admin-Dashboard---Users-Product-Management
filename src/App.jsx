@@ -24,7 +24,7 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route element={<AppLayout />}>
               <Route path='/dashboard/users' element={<Users />} />
-              <Route path='/dashboard/users/user-details' element={<UserDetails />} />
+              <Route path='/dashboard/users/:id' element={<UserDetails />} />
               <Route path='/dashboard/products' element={<Products />} />
             </Route>
           </Route>
