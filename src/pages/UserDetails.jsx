@@ -46,7 +46,7 @@ const UserDetails = () => {
 
         <div className="user-top px-10">
           <p className="name-top text-2xl font-semibold">{loading ? 'Loading...' : user.name}</p>
-          <p className="user-name-top text-sm font-semibold text-[#757575]">{loading ? 'Loading...' : user.usernam}</p>
+          <p className="user-name-top text-sm font-semibold text-[#757575]">{loading ? 'Loading...' : user.username}</p>
         </div>
 
         <div className="user-details py-10">
