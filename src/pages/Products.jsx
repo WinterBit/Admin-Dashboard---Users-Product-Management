@@ -9,6 +9,14 @@ const Product = () => {
     setProducts(data)
   }, [])
 
+  function editProduct(id, newValues) {
+    setProducts((prev) => {
+      const updated = prev.map((item) => item.id === id ? { ...item, name:newValues.ProductName, price:Number(newValues.price), stock:Number(newValues.stock) } : item)
+      localStorage.setItem("products",JSON.stringify(updated));
+      return updated
+    })
+  }
+
   function deleteProduct(id) {
     setProducts((prev) => {
       const updated = prev.filter(item => item.id !== id);
@@ -48,7 +56,7 @@ const Product = () => {
                 <p className='text-red-500'>No Products are Avaliable</p>
               </div>) :
               (products.map((product) => (
-                <ProductRow key={product.id} product={product} deleteProduct={deleteProduct} />
+                <ProductRow key={product.id} product={product} deleteProduct={deleteProduct} editProduct={editProduct} />
               )))
           }
         </div>

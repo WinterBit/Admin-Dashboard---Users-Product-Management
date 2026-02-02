@@ -4,7 +4,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaCheckCircle } from "react-icons/fa";
 import { FaCircleXmark } from "react-icons/fa6";
 
-const ProductRow = ({ product, deleteProduct }) => {
+const ProductRow = ({ product, deleteProduct, editProduct }) => {
   const [values, setValues] = useState({ "ProductName": product.name, "price": product.price, "stock": product.stock })
 
   const [edit, setEdit] = useState(false)
@@ -20,8 +20,19 @@ const ProductRow = ({ product, deleteProduct }) => {
     ))
   }
 
-  function handleEdit() {
+  function toggleEdit() {
     setEdit(!edit)
+  }
+
+  function submitEdit(e) {
+    e.preventDefault()
+    editProduct(product.id, values)
+    setEdit(!edit)
+  }
+
+  function handleCancel() {
+    setEdit(!edit)
+    setValues({ "ProductName": product.name, "price": product.price, "stock": product.stock })
   }
 
   function handleDelete() {
@@ -29,7 +40,7 @@ const ProductRow = ({ product, deleteProduct }) => {
   }
 
   return (
-    <form className="product-row flex border-b">
+    <form className="product-row flex border-b" onSubmit={submitEdit}>
       <div className="product-name w-full p-5 pl-0 flex items-center text-lg font-medium">
         {
           !edit ? (product.name) :
@@ -56,13 +67,13 @@ const ProductRow = ({ product, deleteProduct }) => {
       </div>
       {!edit ?
         (<div className="actions w-full p-5 pl-0 flex items-center space-x-3">
-          <FaRegEdit className="fill-yellow-500 size-7 cursor-pointer hover:fill-yellow-600" onClick={handleEdit} />
+          <FaRegEdit className="fill-yellow-500 size-7 cursor-pointer hover:fill-yellow-600" onClick={handleCancel} />
           <RiDeleteBin6Line className="fill-red-500 size-7 cursor-pointer hover:fill-red-600" onClick={handleDelete} />
         </div>) :
 
         (<div className="actions w-full p-5 pl-0 flex items-center space-x-3">
-          <FaCheckCircle className="fill-green-500 size-7 cursor-pointer hover:fill-green-600" onClick={handleEdit} />
-          <FaCircleXmark className="fill-red-500 size-7 cursor-pointer hover:fill-red-600" onClick={handleEdit} />
+          <FaCheckCircle className="fill-green-500 size-7 cursor-pointer hover:fill-green-600" onClick={submitEdit} />
+          <FaCircleXmark className="fill-red-500 size-7 cursor-pointer hover:fill-red-600" onClick={toggleEdit} />
         </div>)
       }
     </form>
