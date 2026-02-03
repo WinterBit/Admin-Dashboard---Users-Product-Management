@@ -28,14 +28,14 @@ const ProductRow = ({ product, deleteProduct, editProduct }) => {
     const errors = {};
 
     if (values.ProductName.length === 0) {
-      errors.ProductName = "Name is Required"
+      errors.ProductName = "Product name is required"
     }
 
     if (values.price < 1) {
       errors.price = "Mininum price is ₹ 1"
     }
 
-    if (values.stock < 0) {
+    if (values.stock < 0 || values.stock === "") {
       errors.stock = "Mininum stock value is 0"
 
     }
