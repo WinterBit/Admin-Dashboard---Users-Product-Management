@@ -11,11 +11,11 @@ import PrivateRoute from './routes/PrivateRoute'
 import { AuthContext } from './context/AuthContext'
 
 function App() {
-
-  const [loggedIn, setLoggedIn] = useState(false)
+  const loginState = JSON.parse(localStorage.getItem("loggedIn")) || false
+  const [loggedIn, setLoggedIn] = useState(loginState);
 
   return (
-    <AuthContext.Provider value={{loggedIn,setLoggedIn}}>
+    <AuthContext.Provider value={{ loggedIn, setLoggedIn }}>
       <BrowserRouter>
         <Routes>
           <Route path='/Login' element={<Login />} />

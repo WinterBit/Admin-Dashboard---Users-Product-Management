@@ -36,6 +36,7 @@ function Sidebar() {
   }
 
   function handleLogout() {
+    localStorage.setItem("loggedIn", JSON.stringify(false))
     auth.setLoggedIn(false)
   }
 

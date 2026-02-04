@@ -68,6 +68,7 @@ const Login = () => {
 
             setErrors({})
             setForm({ email: "", password: "" })
+            localStorage.setItem("loggedIn", JSON.stringify(true))
             auth.setLoggedIn(true)
             navigate('/dashboard/users/')
         }
