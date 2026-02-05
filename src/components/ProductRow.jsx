@@ -70,11 +70,35 @@ const ProductRow = ({ product, deleteProduct, editProduct }) => {
     deleteProduct(product.id)
   }
 
+  function capitalize(name){
+    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+  }
+
+  function toInr(price) {
+    const Inr = new Intl.NumberFormat('en-IN', {
+      maximumFractionDigits: 0,
+    }).format(price)
+
+    return "₹ " + Inr
+  }
+
+  function displayStock(stock) {
+    if (stock === 0) {
+      return <p className="text-red-500">Out of Stock</p>
+    }
+    else if (stock <= 5) {
+      return <p className="text-yellow-500">{stock}</p>
+    }
+    else {
+      return stock
+    }
+  }
+
   return (
     <form className="product-row flex border-b" >
       <div className="product-name w-full p-5 pl-0 flex flex-col justify-center text-lg font-medium">
         {
-          !edit ? (product.name) :
+          !edit ? (capitalize(product.name)) :
             (
               <input type="text" name="ProductName" value={values.ProductName} onChange={handleChange} className='product-name-input bg-[#DEE4E7] px-4 py-2 rounded-lg' />
             )
@@ -83,7 +107,7 @@ const ProductRow = ({ product, deleteProduct, editProduct }) => {
       </div>
       <div className="pirce w-full p-5 pl-0 flex flex-col justify-center text-lg font-medium">
         {
-          !edit ? (product.price) :
+          !edit ? (toInr(product.price)) :
             (
               <input type="number" min={1} name="price" value={values.price} onChange={handleChange} className='price-input bg-[#DEE4E7] px-4 py-2 rounded-lg' />
             )
@@ -94,7 +118,7 @@ const ProductRow = ({ product, deleteProduct, editProduct }) => {
       </div>
       <div className="stock w-full p-5 pl-0 flex flex-col justify-center text-lg font-medium">
         {
-          !edit ? (product.stock) :
+          !edit ? (displayStock(product.stock)) :
             (
               <input type="number" min={0} name="stock" value={values.stock} onChange={handleChange} className='stock-input bg-[#DEE4E7] px-4 py-2 rounded-lg select-none' />
             )

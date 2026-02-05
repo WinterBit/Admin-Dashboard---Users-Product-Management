@@ -12,7 +12,6 @@ function Navbar() {
       <div className="right w-3/4 flex items-center justify-center">
         <div className="container w-11/12 flex justify-between items-center">
           <p className='greet text-xl font-medium'>Hello, Admin 👋🏽</p>
-          <div className="theme-btn text-base font-medium">Light Mode</div>
         </div>
       </div>
     </nav>
