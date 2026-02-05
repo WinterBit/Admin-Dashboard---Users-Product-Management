@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
 
 import Login from './pages/Login'
@@ -18,6 +18,7 @@ function App() {
     <AuthContext.Provider value={{ loggedIn, setLoggedIn }}>
       <BrowserRouter>
         <Routes>
+          <Route path='/' element={<Navigate to={'/Login'} />} />
           <Route path='/Login' element={<Login />} />
 
           {/* Protected Routes */}
